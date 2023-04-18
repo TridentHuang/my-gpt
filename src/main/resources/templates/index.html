@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--    <script src="/axios.min.js"/>-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/marked/2.0.3/marked.js"></script>
+</head>
+<body>
+<div>
+    <div>
+        <span>输入问题:</span>
+        <textarea id="content" type="text"></textarea>
+        <button th:text="获取" onclick="get('123')"/>
+    </div>
+    <div id="response"></div>
+</div>
+</button>
+<script>
+    function get(value) {
+        let content = document.getElementById("content").value
+        console.log(content)
+        axios.get("/demo", {
+            params: {
+                msg: content
+            }
+        }).then(response => {
+            let res = document.getElementById("response");
+            console.log(response.data.msg)
+            // let resp = response.data.msg.replace("\n\n", "<br/>")
+            // res.innerHTML = resp;
+            res.innerHTML = marked(response.data.msg);
+
+            // document.getElementById("md-view").innerHTML = marked(content)
+        })
+    }
+</script>
+</body>
+
+</html>

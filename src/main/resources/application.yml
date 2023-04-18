@@ -1,1 +1,12 @@
-
+#html存放的具体路径，可进行自定义，示例：resources/templates
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+  thymeleaf:
+    prefix: classpath:/templates/
+    encoding: UTF-8
+    cache: false
+    suffix: .html
+    servlet:
+      content-type: text/html
