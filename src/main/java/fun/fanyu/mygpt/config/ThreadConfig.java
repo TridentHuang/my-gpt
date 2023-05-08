@@ -1,9 +1,13 @@
 package fun.fanyu.mygpt.config;
 
 import com.unfbx.chatgpt.OpenAiClient;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 
 /**
@@ -16,16 +20,13 @@ import java.util.Arrays;
 @Configuration
 public class ThreadConfig {
 
+    @Resource
+    GptConfig config;
+
     @Bean
     public OpenAiClient openAiClient() {
         return OpenAiClient.builder()
-                .apiKey(Arrays.asList("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",
-                        "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"))
-                //自定义key的获取策略：默认KeyRandomStrategy
-                //.keyStrategy(new KeyRandomStrategy())
-//                .keyStrategy(new FirstKeyStrategy())
-                //自己做了代理就传代理地址，没有可不不传
-//                .apiHost("https://自己代理的服务器地址/")
+                .apiKey(Arrays.asList(config.getApiKey()))
                 .build();
     }
 }

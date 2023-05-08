@@ -4,6 +4,7 @@ import com.unfbx.chatgpt.OpenAiClient;
 import com.unfbx.chatgpt.entity.chat.ChatCompletion;
 import com.unfbx.chatgpt.entity.chat.ChatCompletionResponse;
 import com.unfbx.chatgpt.entity.chat.Message;
+import fun.fanyu.mygpt.config.GptConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +16,8 @@ class MyGptApplicationTests {
 
     @Autowired
     private OpenAiClient openAiClient;
+    @Autowired
+    private GptConfig config;
 
     @Test
     void contextLoads() {
@@ -39,11 +42,7 @@ class MyGptApplicationTests {
     //单例模式
     @Test
     public void completionsV3() {
-        Message message = Message.builder().role(Message.Role.USER).content("你好啊我的伙伴！").build();
-        ChatCompletion chatCompletion = ChatCompletion.builder().messages(Arrays.asList(message)).build();
-        ChatCompletionResponse chatCompletionResponse = openAiClient.chatCompletion(chatCompletion);
-        chatCompletionResponse.getChoices().forEach(e -> {
-            System.out.println(e.getMessage());
-        });
+        String apiKey = config.getApiKey();
+        System.out.println(apiKey);
     }
 }

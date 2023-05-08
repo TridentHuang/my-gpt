@@ -1,5 +1,11 @@
 package fun.fanyu.mygpt.config;
 
+import lombok.Data;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
 /**
  * @version V3.0
  * @Title: GptConfig
@@ -7,7 +13,9 @@ package fun.fanyu.mygpt.config;
  * @author: Trident
  * @date 2023/4/7 11:10 AM
  */
-public interface GptConfig {
-    String API_KEY_ONE = "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";
-    String API_KEY_TWO = "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";
+@Component
+@Data
+public class GptConfig {
+    @Value("${gpt.api_key}")
+    private String apiKey;
 }
